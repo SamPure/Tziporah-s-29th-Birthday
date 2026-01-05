@@ -50,23 +50,79 @@
 
   <script>
     (function(){
-      const messages = [
-        "Happy 29th, Tziporah! Wishing you a year of joy and sparkling moments ✨",
-        "Cheers to 29! May your day be filled with laughter, love and cake 🍰",
-        "Happy 29th Birthday, Tziporah — may this year bring adventures and bright surprises 🎉",
-        "Wishing you an amazing 29th — health, happiness and dreamy memories 🥂",
-        "Happy 29th! Keep shining and may all your wishes come true 🌟",
-        "Sending big birthday hugs on your 29th, Tziporah — celebrate in style 💖"
-      ];
+      // generate 500 unique, themed, funny Hallmark-style wishes programmatically
+      const wishes = (function(){
+        const friends = [
+          'Central Perk coffee in hand', 'a Monica-level clean sweep of joy', 'a Chandler-style wink', 'a Joey-sized slice of cake', 'a Ross-worthy romantic plot twist', 'your lobster waiting around the corner', 'a reunion in the couch zone', 'a friend-tier hug that never ends'
+        ];
+        const newGirl = [
+          "Jess's quirky confetti of joy", 'Schmidt-approved swagger', 'Nick-level dry humor', 'Winston-style playful chaos', 'Cece-worthy glam moments', "a loft-full of sing-along confetti"
+        ];
+        const jokers = [
+          'an Impractical-Jokers-approved prank of happiness', 'a sneaky grin and harmless mischief', 'a laugh that would make the Jokers proud', 'a surprise that ends in belly laughs', 'a day of playful dares and extra frosting'
+        ];
+        const hallmarks = [
+          'wishing you cozy moments and big laughs', 'may your heart be as full as your dessert plate', 'sending you warm confetti and extra sparkle', 'celebrating you with cheese, cake, and charm', 'may this year read like your favorite feel-good episode'
+        ];
 
+        const templates = [
+          (A,B) => `Happy 29th, Tziporah! May your day be full of ${A} and ${B}.`,
+          (A,B) => `Cheers to 29 — may you get ${A}, ${B}, and a lifetime supply of smiles.`,
+          (A,B) => `Happy birthday! Think Central Perk vibes, ${A}, and ${B} — all for you.`,
+          (A,B) => `29 looks good on you: more ${A}, more ${B}, and lots of cake.`,
+          (A,B) => `To Tziporah on 29: ${A}, ${B}, and an honest-to-goodness happy dance.`,
+          (A,B) => `Wishing you a day of ${A} with a side of ${B} — signature Hallmark warmth.`
+        ];
+
+        const set = new Set();
+        const out = [];
+        const pools = [friends, newGirl, jokers, hallmarks];
+
+        function pick(source){
+          return source[Math.floor(Math.random()*source.length)];
+        }
+
+        while(out.length < 500){
+          const t = templates[Math.floor(Math.random()*templates.length)];
+          const a = pick(pools[Math.floor(Math.random()*pools.length)]);
+          const b = pick(pools[Math.floor(Math.random()*pools.length)]);
+          let wish = t(a,b);
+          // lightly vary punctuation/emoji for Hallmark-style warmth
+          if(Math.random()<0.25) wish += ' ✨';
+          else if(Math.random()<0.25) wish += ' 🎉';
+          else if(Math.random()<0.12) wish += ' 💖';
+
+          // ensure uniqueness by appending a tiny friendly flourish if necessary
+          if(set.has(wish)){
+            const flourish = ['',' (with extra confetti)',' — love & laughs',' (send cake)',' (Hugs!)'][Math.floor(Math.random()*5)];
+            wish = wish + flourish;
+          }
+          if(!set.has(wish)){
+            set.add(wish);
+            out.push(wish);
+          }
+        }
+        return out;
+      })();
+
+      function shuffle(arr){
+        const a = arr.slice();
+        for(let i=a.length-1;i>0;i--){
+          const j = Math.floor(Math.random()*(i+1));
+          [a[i],a[j]] = [a[j],a[i]];
+        }
+        return a;
+      }
+
+      let pool = shuffle(wishes);
       const phone = '18458458251190';
       const btn = document.getElementById('sendBtn');
 
       function pickAndSend(){
-        const msg = messages[Math.floor(Math.random()*messages.length)];
+        if(pool.length === 0) pool = shuffle(messages);
+        const msg = pool.pop();
         const encoded = encodeURIComponent(msg);
         const url = `https://wa.me/${phone}?text=${encoded}`;
-        // Redirect to WhatsApp
         window.location.href = url;
       }
 

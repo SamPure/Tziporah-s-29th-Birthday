@@ -84,8 +84,9 @@
 
         while(out.length < 500){
           const t = templates[Math.floor(Math.random()*templates.length)];
-          const a = pick(pools[Math.floor(Math.random()*pools.length)]);
-          const b = pick(pools[Math.floor(Math.random()*pools.length)]);
+          const poolA = pools[Math.floor(Math.random()*pools.length)];
+          const poolB = pools[Math.floor(Math.random()*pools.length)];
+          const [a,b] = pickDifferent(poolA, poolB, pick);
           let wish = t(a,b);
           // lightly vary punctuation/emoji for Hallmark-style warmth
           if(Math.random()<0.25) wish += ' ✨';
@@ -115,12 +116,24 @@
       }
 
       let pool = shuffle(wishes);
-      const rawPhone = '+18458251190';
+      const rawPhone = '18454999591';
       const phone = rawPhone.replace(/\D/g, '');
+
+      // ensure templates pick two different parts for variety
+      function pickDifferent(sourceA, sourceB, pickFn){
+        let a = pickFn(sourceA);
+        let b = pickFn(sourceB);
+        let attempts = 0;
+        while(a === b && attempts < 6){
+          b = pickFn(sourceB);
+          attempts++;
+        }
+        return [a,b];
+      }
       const btn = document.getElementById('sendBtn');
 
       function pickAndSend(){
-        if(pool.length === 0) pool = shuffle(messages);
+        if(pool.length === 0) pool = shuffle(wishes);
         const msg = pool.pop();
         const encoded = encodeURIComponent(msg);
         const url = `https://wa.me/${phone}?text=${encoded}`;

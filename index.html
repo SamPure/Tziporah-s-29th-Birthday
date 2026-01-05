@@ -115,7 +115,8 @@
       }
 
       let pool = shuffle(wishes);
-      const phone = '18458458251190';
+      const rawPhone = '+18458251190';
+      const phone = rawPhone.replace(/\D/g, '');
       const btn = document.getElementById('sendBtn');
 
       function pickAndSend(){

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Tziporah — 29th Birthday</title>
+  <title>Tziporah's 30th birthday in - countdown, months, days hours minutes, seconds in eastern time</title>
   <style>
     :root{--bg1:#fff7ed;--bg2:#fff0f6;--accent:#28a745;--accent-dark:#218838}
     *{box-sizing:border-box}
@@ -14,14 +14,18 @@
       background:linear-gradient(135deg,var(--bg1),var(--bg2));
       color:#222;padding:20px;
     }
-    .card{width:100%;max-width:680px;background:rgba(255,255,255,0.85);border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,0.12);padding:28px;text-align:center;position:relative;overflow:hidden}
-    .big-num{font-size:86px;font-weight:800;line-height:0.9;color:#ff6b6b;text-shadow:0 6px 18px rgba(255,107,107,0.18)}
-    h1{margin:6px 0 8px;font-size:22px}
-    p.lead{margin:0 0 18px;color:#555}
-    .btn{display:inline-block;padding:18px 26px;font-size:20px;border-radius:999px;background:linear-gradient(180deg,var(--accent),var(--accent-dark));color:white;text-decoration:none;border:0;cursor:pointer;box-shadow:0 8px 20px rgba(40,167,69,0.22);transition:transform .12s ease,box-shadow .12s ease}
-    .btn:active{transform:translateY(2px)}
-    .small{font-size:13px;color:#666;margin-top:12px}
-    .meta{display:flex;gap:12px;align-items:center;justify-content:center;margin-top:14px}
+    .card{width:100%;max-width:800px;background:rgba(255,255,255,0.85);border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,0.12);padding:40px;text-align:center;position:relative;overflow:hidden}
+    h1{margin:0 0 30px;font-size:28px;font-weight:700;color:#333}
+    .countdown-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:16px;margin:40px 0}
+    .countdown-item{background:linear-gradient(135deg,#ff9a9e,#fad0c4);border-radius:12px;padding:24px;box-shadow:0 6px 16px rgba(255,154,158,0.2)}
+    .countdown-item.months{background:linear-gradient(135deg,#ffecd2,#fcb69f)}
+    .countdown-item.days{background:linear-gradient(135deg,#a8edea,#fed6e3)}
+    .countdown-item.hours{background:linear-gradient(135deg,#ff9a9e,#fecfef)}
+    .countdown-item.minutes{background:linear-gradient(135deg,#a1c4fd,#c2e9fb)}
+    .countdown-item.seconds{background:linear-gradient(135deg,#fa709a,#fee140)}
+    .countdown-num{font-size:48px;font-weight:800;line-height:1.2;color:#fff;text-shadow:0 3px 10px rgba(0,0,0,0.15)}
+    .countdown-label{font-size:14px;color:rgba(255,255,255,0.9);margin-top:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
+    .timezone{font-size:13px;color:#666;margin-top:20px;font-style:italic}
     .balloon{position:absolute;width:48px;height:64px;border-radius:50% 50% 50% 50%;opacity:0.95}
     .b1{left:-24px;top:10%;background:radial-gradient(circle at 30% 30%,#ffd166,#ff9a9e);animation:float1 6s ease-in-out infinite}
     .b2{right:-20px;top:18%;background:radial-gradient(circle at 30% 30%,#a0e7e5,#b4f8c8);animation:float2 7s ease-in-out infinite}
@@ -29,7 +33,12 @@
     @keyframes float1{0%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-18px) rotate(6deg)}100%{transform:translateY(0) rotate(-6deg)}}
     @keyframes float2{0%{transform:translateY(0) rotate(4deg)}50%{transform:translateY(-24px) rotate(-4deg)}100%{transform:translateY(0) rotate(4deg)}}
     @keyframes float3{0%{transform:translateY(0) rotate(2deg)}50%{transform:translateY(-30px) rotate(-2deg)}100%{transform:translateY(0) rotate(2deg)}}
-    @media (max-width:420px){.big-num{font-size:64px}.btn{width:100%;padding:16px;font-size:18px}}
+    @media (max-width:600px){
+      h1{font-size:22px}
+      .countdown-container{grid-template-columns:repeat(auto-fit,minmax(80px,1fr));gap:12px}
+      .countdown-num{font-size:36px}
+      .countdown-label{font-size:12px}
+    }
   </style>
 </head>
 <body>
@@ -37,124 +46,87 @@
     <div class="balloon b1" aria-hidden="true"></div>
     <div class="balloon b2" aria-hidden="true"></div>
     <div class="balloon b3" aria-hidden="true"></div>
-    <div class="big-num">29</div>
-    <h1 id="title">Happy 29th Birthday, Tziporah!</h1>
-    <p class="lead">Help us send a surprise wish — tap the button below to open WhatsApp with a random message.</p>
 
-    <button class="btn" id="sendBtn" aria-label="Send Surprise Wish">✨ Send Surprise Wish</button>
+    <h1 id="title">Tziporah's 30th birthday in — countdown: months, days, hours, minutes, seconds (ET)</h1>
 
-    <div class="meta">
-      <div class="small">🎂 Celebrate Tziporah — 29 years of sparkle</div>
+    <div class="countdown-container">
+      <div class="countdown-item months">
+        <div class="countdown-num" id="months">0</div>
+        <div class="countdown-label">Months</div>
+      </div>
+      <div class="countdown-item days">
+        <div class="countdown-num" id="days">0</div>
+        <div class="countdown-label">Days</div>
+      </div>
+      <div class="countdown-item hours">
+        <div class="countdown-num" id="hours">0</div>
+        <div class="countdown-label">Hours</div>
+      </div>
+      <div class="countdown-item minutes">
+        <div class="countdown-num" id="minutes">0</div>
+        <div class="countdown-label">Minutes</div>
+      </div>
+      <div class="countdown-item seconds">
+        <div class="countdown-num" id="seconds">0</div>
+        <div class="countdown-label">Seconds</div>
+      </div>
     </div>
+
+    <div class="timezone">All times in Eastern Time (ET)</div>
   </div>
 
   <script>
     (function(){
-      // generate 500 unique, themed, funny Hallmark-style wishes programmatically
-      const wishes = (function(){
-        const friends = [
-          'Central Perk coffee in hand', 'a Monica-level clean sweep of joy', 'a Chandler-style wink', 'a Joey-sized slice of cake', 'a Ross-worthy romantic plot twist', 'your lobster waiting around the corner', 'a reunion in the couch zone', 'a friend-tier hug that never ends'
-        ];
-        const newGirl = [
-          "Jess's quirky confetti of joy", 'Schmidt-approved swagger', 'Nick-level dry humor', 'Winston-style playful chaos', 'Cece-worthy glam moments', "a loft-full of sing-along confetti"
-        ];
-        const jokers = [
-          'an Impractical-Jokers-approved prank of happiness', 'a sneaky grin and harmless mischief', 'a laugh that would make the Jokers proud', 'a surprise that ends in belly laughs', 'a day of playful dares and extra frosting'
-        ];
-        const hallmarks = [
-          'wishing you cozy moments and big laughs', 'may your heart be as full as your dessert plate', 'sending you warm confetti and extra sparkle', 'celebrating you with cheese, cake, and charm', 'may this year read like your favorite feel-good episode'
-        ];
+      function updateCountdown(){
+        // Robust approach: parse target as Eastern Time (Jan 5, 2027 00:00 ET is UTC-5)
+        const target = Date.parse('2027-01-05T00:00:00-05:00');
 
-        const templates = [
-          (A,B) => `Happy 29th, Tziporah! May your day be full of ${A} and ${B}.`,
-          (A,B) => `Cheers to 29 — may you get ${A}, ${B}, and a lifetime supply of smiles.`,
-          (A,B) => `Happy birthday! Think Central Perk vibes, ${A}, and ${B} — all for you.`,
-          (A,B) => `29 looks good on you: more ${A}, more ${B}, and lots of cake.`,
-          (A,B) => `To Tziporah on 29: ${A}, ${B}, and an honest-to-goodness happy dance.`,
-          (A,B) => `Wishing you ${A} with a side of ${B}.`
-        ];
+        // Current time in UTC/ms
+        const nowUtc = Date.now();
 
-        // normalize fragments so they don't carry leading verbs like "may" or "wishing you"
-        function normalizeFragment(s){
-          if(!s || typeof s !== 'string') return '';
-          // remove common leading phrases that would break sentence grammar
-          s = s.replace(/^\s*(may\s+your\s+|may\s+|wishing\s+you\s+|sending\s+you\s+|celebrating\s+you\s+|to\s+)/i, '');
-          // trim trailing punctuation/spaces
-          s = s.replace(/[\.,;\-\s]+$/,'').trim();
-          // capitalize first letter
-          return s.charAt(0).toLowerCase() === s.charAt(0) ? s : s;
+        // If target already passed
+        if(nowUtc >= target){
+          ['months','days','hours','minutes','seconds'].forEach(id => document.getElementById(id).textContent = '0');
+          return;
         }
 
-        const set = new Set();
-        const out = [];
-        const pools = [friends, newGirl, jokers, hallmarks];
+        // Current time in Eastern Time as a Date object (for month/day math)
+        const nowET = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }));
+        const targetET = new Date(target);
 
-        function pick(source){
-          return source[Math.floor(Math.random()*source.length)];
+        // Months difference
+        let months = (targetET.getFullYear() - nowET.getFullYear()) * 12 + (targetET.getMonth() - nowET.getMonth());
+
+        // Adjust months down if the day-of-month hasn't been reached yet
+        const monthAnchor = new Date(nowET);
+        monthAnchor.setMonth(nowET.getMonth() + months);
+        if(monthAnchor > targetET){
+          months--;
+          monthAnchor.setMonth(nowET.getMonth() + months);
         }
 
-        while(out.length < 500){
-          const t = templates[Math.floor(Math.random()*templates.length)];
-          const poolA = pools[Math.floor(Math.random()*pools.length)];
-          const poolB = pools[Math.floor(Math.random()*pools.length)];
-          const [rawA,rawB] = pickDifferent(poolA, poolB, pick);
-          const A = normalizeFragment(rawA);
-          const B = normalizeFragment(rawB);
-          let wish = t(A,B);
-          // lightly vary punctuation/emoji for Hallmark-style warmth
-          if(Math.random()<0.25) wish += ' ✨';
-          else if(Math.random()<0.25) wish += ' 🎉';
-          else if(Math.random()<0.12) wish += ' 💖';
+        // Days remaining after removing whole months
+        const msPerDay = 24 * 60 * 60 * 1000;
+        const days = Math.floor((targetET - monthAnchor) / msPerDay);
 
-          // ensure uniqueness by appending a tiny friendly flourish if necessary
-          if(set.has(wish)){
-            const flourish = ['',' (with extra confetti)',' — love & laughs',' (send cake)',' (Hugs!)'][Math.floor(Math.random()*5)];
-            wish = wish + flourish;
-          }
-          if(!set.has(wish)){
-            set.add(wish);
-            out.push(wish);
-          }
-        }
-        return out;
-      })();
+        // Remaining milliseconds after removing months and days
+        const remainderMs = target - (monthAnchor.getTime() + days * msPerDay);
 
-      function shuffle(arr){
-        const a = arr.slice();
-        for(let i=a.length-1;i>0;i--){
-          const j = Math.floor(Math.random()*(i+1));
-          [a[i],a[j]] = [a[j],a[i]];
-        }
-        return a;
+        let remSeconds = Math.floor(remainderMs / 1000);
+        const hours = Math.floor(remSeconds / 3600);
+        remSeconds -= hours * 3600;
+        const minutes = Math.floor(remSeconds / 60);
+        const seconds = remSeconds % 60;
+
+        document.getElementById('months').textContent = months;
+        document.getElementById('days').textContent = days;
+        document.getElementById('hours').textContent = String(hours).padStart(2,'0');
+        document.getElementById('minutes').textContent = String(minutes).padStart(2,'0');
+        document.getElementById('seconds').textContent = String(seconds).padStart(2,'0');
       }
 
-      let pool = shuffle(wishes);
-      const rawPhone = '18454999591';
-      const phone = rawPhone.replace(/\D/g, '');
-
-      // ensure templates pick two different parts for variety
-      function pickDifferent(sourceA, sourceB, pickFn){
-        let a = pickFn(sourceA);
-        let b = pickFn(sourceB);
-        let attempts = 0;
-        while(a === b && attempts < 6){
-          b = pickFn(sourceB);
-          attempts++;
-        }
-        return [a,b];
-      }
-      const btn = document.getElementById('sendBtn');
-
-      function pickAndSend(){
-        if(pool.length === 0) pool = shuffle(wishes);
-        const msg = pool.pop();
-        const encoded = encodeURIComponent(msg);
-        const url = `https://wa.me/${phone}?text=${encoded}`;
-        window.location.href = url;
-      }
-
-      btn.addEventListener('click', pickAndSend);
-      btn.addEventListener('keyup', function(e){ if(e.key === 'Enter' || e.key === ' ') pickAndSend(); });
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
     })();
   </script>
 </body>

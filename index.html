@@ -107,7 +107,7 @@
 
         // Days remaining after removing whole months
         const msPerDay = 24 * 60 * 60 * 1000;
-        const days = Math.floor((targetET - monthAnchor) / msPerDay);
+        const days = Math.floor(Math.abs(targetET - monthAnchor) / msPerDay);
 
         // Remaining milliseconds after removing months and days
         const remainderMs = target - (monthAnchor.getTime() + days * msPerDay);
